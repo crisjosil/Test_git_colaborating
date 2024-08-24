@@ -25,12 +25,25 @@
             text-align: center;
         }
         .right {
-            background-color: #e0f7fa;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #004d40; /* Darker teal color */
+            color: white;
             text-align: center;
+            padding: 20px;
+        }
+        .clock-section {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+        }
+        .bottom-section {
+            background: linear-gradient(to bottom right, #00695c, #004d40);
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
         }
         input {
             padding: 5px;
@@ -52,6 +65,9 @@
             font-size: 18px;
             margin-bottom: 10px;
         }
+        .bottom-section h2 {
+            margin-top: 0;
+        }
     </style>
 </head>
 <body>
@@ -59,14 +75,14 @@
         <div class="left">
             <h1>Hello, World!</h1>
             <p>This is a simple HTML page for testing purposes.</p>
-            
+           
             <p>Enter your name:</p>
             <input type="text" id="nameInput" placeholder="Your name here">
-            
+           
             <br>
-            
+           
             <button onclick="greetUser()">Greet Me!</button>
-            
+           
             <p id="greeting"></p>
 
             <pre>
@@ -76,8 +92,14 @@
             </pre>
         </div>
         <div class="right">
-            <div id="clockTitle">Current Time:</div>
-            <div id="clock">Loading...</div>
+            <div class="clock-section">
+                <div id="clockTitle">Current Time:</div>
+                <div id="clock">Loading...</div>
+            </div>
+            <div class="bottom-section">
+                <h2>Welcome to My Page!</h2>
+                <p>Enjoy exploring and testing out this simple HTML layout. Have a great day!</p>
+            </div>
         </div>
     </div>
 
