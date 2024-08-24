@@ -6,10 +6,30 @@
     <title>My Test Page</title>
     <style>
         body {
+            margin: 0;
+            display: flex;
+            height: 100vh;
             background-color: #90ee90;
             font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+        }
+        .left, .right {
+            flex: 1;
+            padding: 20px;
+        }
+        .left {
+            background-color: #f0f8ff;
             text-align: center;
-            margin-top: 50px;
+        }
+        .right {
+            background-color: #e0f7fa;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         input {
             padding: 5px;
@@ -23,26 +43,37 @@
             font-family: "Courier New", monospace;
             margin-top: 20px;
         }
+        #clock {
+            font-size: 24px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <h1>Hello, World!</h1>
-    <p>This is a simple HTML page for testing purposes.</p>
-    
-    <p>Enter your name:</p>
-    <input type="text" id="nameInput" placeholder="Your name here">
-    
-    <br>
-    
-    <button onclick="greetUser()">Greet Me!</button>
-    
-    <p id="greeting"></p>
+    <div class="container">
+        <div class="left">
+            <h1>Hello, World!</h1>
+            <p>This is a simple HTML page for testing purposes.</p>
+           
+            <p>Enter your name:</p>
+            <input type="text" id="nameInput" placeholder="Your name here">
+           
+            <br>
+           
+            <button onclick="greetUser()">Greet Me!</button>
+           
+            <p id="greeting"></p>
 
-    <pre>
-       /\_/\
-      ( o.o )
-       > ^ <
-    </pre>
+            <pre>
+               /\_/\
+              ( o.o )
+               > ^ <
+            </pre>
+        </div>
+        <div class="right">
+            <div id="clock">Loading...</div>
+        </div>
+    </div>
 
     <script>
         function greetUser() {
@@ -50,6 +81,17 @@
             var greetingMessage = "Hello, " + name + "!";
             document.getElementById('greeting').innerText = greetingMessage;
         }
+
+        function updateClock() {
+            var now = new Date();
+            var hours = now.getHours().toString().padStart(2, '0');
+            var minutes = now.getMinutes().toString().padStart(2, '0');
+            var seconds = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('clock').innerText = `${hours}:${minutes}:${seconds}`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call to set the time immediately
     </script>
 </body>
 </html>
