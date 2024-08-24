@@ -28,6 +28,7 @@
             background-color: #e0f7fa;
             text-align: center;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
@@ -47,6 +48,10 @@
             font-size: 24px;
             font-weight: bold;
         }
+        #clockTitle {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -54,14 +59,14 @@
         <div class="left">
             <h1>Hello, World!</h1>
             <p>This is a simple HTML page for testing purposes.</p>
-           
+            
             <p>Enter your name:</p>
             <input type="text" id="nameInput" placeholder="Your name here">
-           
+            
             <br>
-           
+            
             <button onclick="greetUser()">Greet Me!</button>
-           
+            
             <p id="greeting"></p>
 
             <pre>
@@ -71,6 +76,7 @@
             </pre>
         </div>
         <div class="right">
+            <div id="clockTitle">Current Time:</div>
             <div id="clock">Loading...</div>
         </div>
     </div>
