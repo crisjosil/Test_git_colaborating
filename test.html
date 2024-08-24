@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Test Page</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         body {
             margin: 0;
@@ -44,11 +45,24 @@
             color: #ffffff;
             padding: 20px;
             border-radius: 8px;
+            position: relative;
+            height: 300px; /* Set a height for the map */
+        }
+        #map {
+            height: 100%;
+            width: 100%;
+            border-radius: 8px;
         }
         input {
             padding: 5px;
             font-size: 16px;
             margin-bottom: 10px;
+        }
+        select {
+            padding: 5px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            width: 100%;
         }
         #greeting {
             font-weight: bold;
@@ -75,15 +89,35 @@
         <div class="left">
             <h1>Hello, World!</h1>
             <p>This is a simple HTML page for testing purposes.</p>
-           
+            
             <p>Enter your name:</p>
             <input type="text" id="nameInput" placeholder="Your name here">
-           
+            
             <br>
-           
+            
             <button onclick="greetUser()">Greet Me!</button>
-           
+            
             <p id="greeting"></p>
+            
+            <h2>Select Options:</h2>
+            <select id="dropdown1">
+                <option value="" disabled selected>Select an option...</option>
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+            </select>
+            <select id="dropdown2">
+                <option value="" disabled selected>Select an option...</option>
+                <option value="optionA">Option A</option>
+                <option value="optionB">Option B</option>
+                <option value="optionC">Option C</option>
+            </select>
+            <select id="dropdown3">
+                <option value="" disabled selected>Select an option...</option>
+                <option value="optionX">Option X</option>
+                <option value="optionY">Option Y</option>
+                <option value="optionZ">Option Z</option>
+            </select>
 
             <pre>
                /\_/\
@@ -92,18 +126,51 @@
             </pre>
         </div>
         <div class="right">
+            <div class="bottom-section">
+                <h2>Explore the Map!</h2>
+                <div id="map"></div> <!-- Map container -->
+            </div>
             <div class="clock-section">
                 <div id="clockTitle">Current Time:</div>
                 <div id="clock">Loading...</div>
             </div>
-            <div class="bottom-section">
-                <h2>Welcome to My Page!</h2>
-                <p>Enjoy exploring and testing out this simple HTML layout. Have a great day!</p>
-            </div>
         </div>
     </div>
 
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
+        // Initialize the map
+        var map = L.map('map').setView([51.505, -0.09], 13); // Default view
+
+        // Add a tile layer (you can use different providers here)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // Function to handle geolocation
+        function onLocationFound(position) {
+            var latlng = [position.coords.latitude, position.coords.longitude];
+            map.setView(latlng, 13); // Center map on user's location
+
+            L.marker(latlng).addTo(map)
+                .bindPopup('You are here!')
+                .openPopup();
+        }
+
+        function onLocationError() {
+            alert("Unable to retrieve your location.");
+        }
+
+        // Check if geolocation is supported
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(onLocationFound, onLocationError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+
+        // Existing functions for clock and greeting
         function greetUser() {
             var name = document.getElementById('nameInput').value;
             var greetingMessage = "Hello, " + name + "!";
