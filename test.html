@@ -4,10 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Test Page</title>
+    <style>
+        body {
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input {
+            padding: 5px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Hello, World!</h1>
     <p>This is a simple HTML page for testing purposes.</p>
-    <button onclick="alert('Button clicked!')">Click Me!</button>
+    
+    <p>Enter your name:</p>
+    <input type="text" id="nameInput" placeholder="Your name here">
+    
+    <br>
+    
+    <button onclick="greetUser()">Greet Me!</button>
+    
+    <p id="greeting"></p>
+
+    <script>
+        function greetUser() {
+            var name = document.getElementById('nameInput').value;
+            var greetingMessage = "Hello, " + name + "!";
+            document.getElementById('greeting').innerText = greetingMessage;
+        }
+    </script>
 </body>
 </html>
